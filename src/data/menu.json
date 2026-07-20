@@ -1,0 +1,66 @@
+{
+  "restaurant": {
+    "name": "Perritos El Primo",
+    "logoUrl": "/logo.png",
+    "description": "Los mejores perros calientes y comida rápida de la ciudad. Calidad y sabor desde el primer mordisco.",
+    "location": "Av. Principal Las Delicias, Centro Cívico",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=10.2170255,-67.9913244",
+    "phone": "584244980621",
+    "greeting": "¡Hola! Quisiera hacer el siguiente pedido:",
+    "currency": "$"
+  },
+  "theme": {
+    "primaryColor": "#ef4444"
+  },
+  "categories": [
+    {
+      "id": "c1",
+      "name": "Perros Calientes",
+      "items": [
+        {
+          "id": "p1",
+          "name": "Perro Sencillo",
+          "description": "Salchicha, cebolla, papas, queso y salsas tradicionales.",
+          "price": 2.50,
+          "image": "https://images.unsplash.com/photo-1599599810694-b5b37304c041?auto=format&fit=crop&q=80&w=400&h=300",
+          "removableIngredients": ["Cebolla", "Papas", "Queso", "Salsa de Ajo", "Salsa de Tomate"]
+        },
+        {
+          "id": "p2",
+          "name": "Perro Jumbo Especial",
+          "description": "Salchicha polaca, tocineta, aguacate, queso fundido y extra salsas.",
+          "price": 4.50,
+          "image": "https://images.unsplash.com/photo-1619881589316-56c7f9e6b587?auto=format&fit=crop&q=80&w=400&h=300",
+          "removableIngredients": ["Tocineta", "Aguacate", "Queso Fundido", "Cebolla", "Papas"]
+        }
+      ]
+    },
+    {
+      "id": "c2",
+      "name": "Hamburguesas",
+      "items": [
+        {
+          "id": "h1",
+          "name": "Hamburguesa Clásica",
+          "description": "Carne de 150g, queso cheddar, lechuga, tomate y salsa de la casa.",
+          "price": 5.00,
+          "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&q=80&w=400&h=300",
+          "removableIngredients": ["Queso Cheddar", "Lechuga", "Tomate", "Salsas"]
+        }
+      ]
+    },
+    {
+      "id": "c3",
+      "name": "Bebidas",
+      "items": [
+        {
+          "id": "b1",
+          "name": "Refresco Cola 600ml",
+          "description": "Bien fría",
+          "price": 1.50,
+          "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=400&h=300"
+        }
+      ]
+    }
+  ]
+}
