@@ -21,9 +21,9 @@ export default function Header({ restaurant }) {
             href={restaurant.mapUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(restaurant.location)}`} 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="location-badge"
+            className="header-location"
           >
-            🗺️ Abrir Mapa: {restaurant.location}{restaurant.city ? `, ${restaurant.city}` : ''}{restaurant.state ? `, ${restaurant.state}` : ''}
+            <span>📍</span> {restaurant.location}{restaurant.city ? `, ${restaurant.city}` : ''} (Ver mapa)
           </a>
         )}
       </div>
