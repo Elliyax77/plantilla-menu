@@ -16,7 +16,10 @@ export default function ProductCard({ item, currency, cartQty, onClick }) {
             </div>
           ) : (
             <button className="btn-add">
-              <span style={{ color: 'var(--primary-text)', marginRight: '4px', fontWeight: '900', fontSize: '15px' }}>+</span> Agregar
+              <span style={{ display: 'flex', alignItems: 'center', gap: '4px', transform: 'translateY(-1px)' }}>
+                <span style={{ fontWeight: '900', fontSize: '16px' }}>+</span>
+                <span>Agregar</span>
+              </span>
             </button>
           )}
         </div>
