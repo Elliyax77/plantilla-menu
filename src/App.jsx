@@ -15,6 +15,33 @@ function App() {
   // Extraer información del JSON
   const { restaurant, theme, categories } = menuData
   
+  // Calcular automáticamente si está abierto (de 10am a 11pm hora Venezuela)
+  const checkIsOpen = () => {
+    try {
+      const vzlaTime = new Date().toLocaleString("en-US", {timeZone: "America/Caracas"});
+      const date = new Date(vzlaTime);
+      const hours = date.getHours();
+      // 10:00 AM a 11:00 PM (23:00)
+      return hours >= 10 && hours < 23;
+    } catch (e) {
+      // Fallback local time
+      const hours = new Date().getHours();
+      return hours >= 10 && hours < 23;
+    }
+  };
+
+  const [isRestaurantOpen, setIsRestaurantOpen] = useState(checkIsOpen());
+
+  useEffect(() => {
+    // Actualizar el estado cada minuto
+    const interval = setInterval(() => {
+      setIsRestaurantOpen(checkIsOpen());
+    }, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const computedRestaurant = { ...restaurant, isOpen: isRestaurantOpen };
+
   // Todos los productos planos para fácil búsqueda
   const allItems = categories.flatMap(c => c.items)
 
@@ -28,6 +55,10 @@ function App() {
   }, [theme, restaurant.name])
 
   const handleProductClick = (item) => {
+    if (!isRestaurantOpen) {
+      alert("Lo sentimos, estamos cerrados por el momento. ¡Te esperamos mañana de 10:00 AM a 11:00 PM!");
+      return;
+    }
     setSelectedItem(item)
   }
 
@@ -84,7 +115,7 @@ function App() {
       <Hero />
       
       <div className="content-wrapper">
-        <Header restaurant={restaurant} />
+        <Header restaurant={computedRestaurant} />
         
         <main>
           {categories.map(category => (
@@ -115,7 +146,7 @@ function App() {
         cart={cart} 
         items={allItems} 
         currency={restaurant.currency} 
-        restaurant={restaurant} 
+        restaurant={computedRestaurant} 
         onUpdateQty={handleUpdateCartItemQty}
         onRemoveItem={handleRemoveCartItem}
       />
