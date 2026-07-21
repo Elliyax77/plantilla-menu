@@ -207,21 +207,22 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background-color: var(--card-bg);
+  background-color: var(--primary-color);
   padding: 10px 18px;
   border-radius: 9999px;
   font-size: 13px;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--primary-text);
   text-decoration: none;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   border: 1px solid var(--primary-color);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
 }
 
 .header-location:hover {
-  background-color: var(--bg-color);
+  background-color: #dc2626;
+  color: var(--primary-text);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
