@@ -155,9 +155,7 @@ button {
 .header h1 {
   font-size: 28px;
   margin-bottom: 8px;
-  background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--text-primary);
 }
 
 .header-desc {
