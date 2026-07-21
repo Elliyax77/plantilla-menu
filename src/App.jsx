@@ -104,6 +104,11 @@ function App() {
             </section>
           ))}
         </main>
+        
+        <footer className="app-footer">
+          <p>Desarrollado con ❤️ por <strong>Elías Espinal</strong></p>
+          <p className="footer-sub">Soluciones de software profesional para restaurantes</p>
+        </footer>
       </div>
 
       <Cart 

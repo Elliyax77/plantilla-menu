@@ -752,3 +752,23 @@ button {
   from { opacity: 0; transform: translateY(-20px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* Footer Signature */
+.app-footer {
+  padding: 30px 20px 40px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-top: 20px;
+  border-top: 1px dashed var(--border-color);
+}
+
+.app-footer strong {
+  color: var(--text-primary);
+}
+
+.app-footer .footer-sub {
+  font-size: 13px;
+  margin-top: 6px;
+  opacity: 0.8;
+}
