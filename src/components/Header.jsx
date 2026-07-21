@@ -23,7 +23,7 @@ export default function Header({ restaurant }) {
             rel="noopener noreferrer" 
             className="header-location"
           >
-            <span>📍</span> {restaurant.location}{restaurant.city ? `, ${restaurant.city}` : ''} (Ver mapa)
+            <span>📍</span> {restaurant.location}{restaurant.city ? `, ${restaurant.city}` : ''} <span style={{opacity: 0.5, marginLeft: '4px'}}>›</span>
           </a>
         )}
       </div>

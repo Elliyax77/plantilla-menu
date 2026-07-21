@@ -206,26 +206,29 @@ button {
 .header-location {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  background-color: var(--bg-color);
-  padding: 6px 14px;
+  gap: 8px;
+  background-color: var(--card-bg);
+  padding: 10px 18px;
   border-radius: 9999px;
   font-size: 13px;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   text-decoration: none;
-  transition: all 0.2s;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
 }
 
 .header-location:hover {
-  background-color: #e4e4e7;
-  color: var(--text-primary);
-  transform: scale(1.02);
+  background-color: var(--bg-color);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .header-location:active {
-  transform: scale(0.95);
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
 }
 
 /* Categorías */
