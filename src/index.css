@@ -161,28 +161,68 @@ button {
   line-height: 1.4;
 }
 
-.header-location {
+.header-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.status-badge {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  background-color: var(--bg-color);
+  gap: 8px;
+  background-color: var(--card-bg);
   padding: 6px 14px;
   border-radius: 9999px;
   font-size: 13px;
-  font-weight: 600;
-  color: var(--text-secondary);
-  text-decoration: none;
-  transition: all 0.2s;
-  cursor: pointer;
+  font-weight: 700;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
 }
 
-.header-location:hover {
-  background-color: #e4e4e7;
-  color: var(--text-primary);
+.status-badge.open {
+  color: #16a34a;
+}
+.status-badge.open .status-dot {
+  background-color: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+}
+
+.status-badge.closed {
+  color: #dc2626;
+}
+.status-badge.closed .status-dot {
+  background-color: #ef4444;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.location-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--primary-color);
+  color: var(--primary-text);
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
+  transition: transform 0.2s;
+}
+
+.location-badge:hover {
   transform: scale(1.02);
 }
 
-.header-location:active {
+.location-badge:active {
   transform: scale(0.95);
 }
 
