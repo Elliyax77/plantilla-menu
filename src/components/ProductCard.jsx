@@ -15,7 +15,9 @@ export default function ProductCard({ item, currency, cartQty, onClick }) {
               <span className="qty-number-badge">{cartQty}</span>
             </div>
           ) : (
-            <button className="btn-add">Agregar</button>
+            <button className="btn-add">
+              <span style={{ color: 'var(--primary-color)', marginRight: '2px', fontWeight: '900', fontSize: '15px' }}>+</span> Agregar
+            </button>
           )}
         </div>
       </div>
