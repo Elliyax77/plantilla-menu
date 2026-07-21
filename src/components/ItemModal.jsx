@@ -69,16 +69,18 @@ export default function ItemModal({ item, currency, onClose, onAddToCart }) {
           )}
 
           {/* Notas adicionales */}
-          <div className="notes-section">
-            <h3 className="section-title">Instrucciones Especiales</h3>
-            <textarea 
-              className="notes-input" 
-              placeholder="Ej. extra salsa de ajo, bien tostado..."
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-              rows="2"
-            ></textarea>
-          </div>
+          {item.customizable !== false && (
+            <div className="notes-section">
+              <h3 className="section-title">Instrucciones Especiales</h3>
+              <textarea 
+                className="notes-input" 
+                placeholder="Ej. extra salsa de ajo, bien tostado..."
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                rows="2"
+              ></textarea>
+            </div>
+          )}
         </div>
 
         {/* Barra inferior (Cantidad y Botón Agregar) */}
