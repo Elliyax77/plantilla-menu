@@ -314,19 +314,23 @@ button {
 }
 
 .btn-add {
-  background-color: var(--bg-color);
-  color: var(--text-primary);
+  background-color: var(--primary-color);
+  color: var(--primary-text);
   border: none;
-  border-radius: 9999px;
-  padding: 8px 18px;
-  font-weight: 700;
-  font-size: 14px;
-  transition: all 0.2s;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
 }
 
 .product-card:hover .btn-add {
-  background-color: var(--text-primary);
-  color: var(--card-bg);
+  background-color: #dc2626;
+  color: var(--primary-text);
+  transform: scale(1.1);
 }
 
 .quantity-badge {
