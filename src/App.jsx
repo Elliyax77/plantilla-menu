@@ -15,8 +15,11 @@ function App() {
   // Extraer información del JSON
   const { restaurant, theme, categories } = menuData
   
-  // Calcular automáticamente si está abierto (de 10am a 11pm hora Venezuela)
+  // Calcular automáticamente si está abierto (Temporalmente forzado a ABIERTO para pruebas)
   const checkIsOpen = () => {
+    return true; // Forzado a abierto por petición del usuario
+    
+    /* Lógica original comentada:
     try {
       const vzlaTime = new Date().toLocaleString("en-US", {timeZone: "America/Caracas"});
       const date = new Date(vzlaTime);
@@ -28,6 +31,7 @@ function App() {
       const hours = new Date().getHours();
       return hours >= 10 && hours < 23;
     }
+    */
   };
 
   const [isRestaurantOpen, setIsRestaurantOpen] = useState(checkIsOpen());
