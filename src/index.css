@@ -253,17 +253,58 @@ button {
 
 .product-card {
   display: flex;
-  gap: 16px;
-  padding: 16px;
-  border-radius: 20px;
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
+  flex-direction: row;
+  background: var(--card-bg);
+  border-radius: 16px;
+  overflow: hidden;
   box-shadow: var(--shadow-sm);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid var(--border-color);
+  padding: 12px;
+  gap: 16px;
+  position: relative;
 }
 
-.product-card:active {
-  transform: scale(0.97);
+/* Estilo para tarjetas en promoción */
+.product-card.promo-card {
+  background-color: var(--primary-color);
+  color: var(--primary-text);
+  border: 2px solid #dc2626;
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
+  transform: scale(1.02);
+}
+
+.product-card.promo-card .product-name {
+  color: var(--primary-text);
+}
+
+.product-card.promo-card .product-desc {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.product-card.promo-card .product-price {
+  color: #fff !important;
+}
+
+.product-card.promo-card .btn-add {
+  background-color: #ffffff;
+  color: var(--primary-color);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.product-card.promo-card .btn-add:hover {
+  background-color: #f8f8f8;
+  transform: scale(1.05) translateY(-1px);
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.product-card.promo-card:hover {
+  transform: scale(1.02) translateY(-4px);
+  box-shadow: 0 12px 24px rgba(239, 68, 68, 0.5);
 }
 
 .product-image {

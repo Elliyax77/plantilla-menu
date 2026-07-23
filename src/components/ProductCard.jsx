@@ -3,7 +3,7 @@ import React from 'react';
 export default function ProductCard({ item, currency, cartQty, onClick, exchangeRate }) {
   return (
     <div 
-      className={`product-card ${item.agotado ? 'agotado' : ''}`} 
+      className={`product-card ${item.agotado ? 'agotado' : ''} ${item.previousPrice && !item.agotado ? 'promo-card' : ''}`} 
       onClick={item.agotado ? undefined : onClick} 
       style={{ cursor: item.agotado ? 'not-allowed' : 'pointer', opacity: item.agotado ? 0.6 : 1 }}
     >
@@ -14,25 +14,25 @@ export default function ProductCard({ item, currency, cartQty, onClick, exchange
             AGOTADO
           </div>
         )}
-        {!item.agotado && item.previousPrice && (
-          <div style={{ position: 'absolute', top: '10px', left: '10px', background: '#22c55e', color: 'white', padding: '4px 8px', borderRadius: '4px', fontWeight: 'bold', fontSize: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.2)' }}>
-            🔥 ¡OFERTA!
-          </div>
-        )}
       </div>
       <div className="product-info">
-        <h3 className="product-name">{item.name}</h3>
+        {!item.agotado && item.previousPrice && (
+          <div style={{ fontWeight: '900', fontStyle: 'italic', fontSize: '14px', letterSpacing: '1px', marginBottom: '4px', textTransform: 'uppercase' }}>
+            PROMOCIÓN
+          </div>
+        )}
+        <h3 className="product-name" style={{ marginTop: (!item.agotado && item.previousPrice) ? '0' : undefined }}>{item.name}</h3>
         <p className="product-desc">{item.description}</p>
         <div className="product-footer">
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             {item.previousPrice && (
-              <span style={{ textDecoration: 'line-through', color: 'var(--text-secondary)', fontSize: '12px', marginBottom: '2px' }}>
+              <span style={{ textDecoration: 'line-through', color: 'rgba(255,255,255,0.7)', fontSize: '12px', marginBottom: '2px' }} className="promo-old-price">
                 {currency}{item.previousPrice.toFixed(2)}
               </span>
             )}
-            <span className="product-price" style={{ color: item.previousPrice ? '#22c55e' : 'inherit' }}>
+            <span className="product-price">
               {currency}{item.price.toFixed(2)}
-              {exchangeRate && <span style={{ fontSize: '0.85em', color: 'var(--text-secondary)', marginLeft: '4px' }}>| Bs {(item.price * exchangeRate).toFixed(2)}</span>}
+              {exchangeRate && <span style={{ fontSize: '0.85em', opacity: 0.9, marginLeft: '4px' }}>| Bs {(item.price * exchangeRate).toFixed(2)}</span>}
             </span>
           </div>
           
