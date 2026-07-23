@@ -52,13 +52,13 @@ function App() {
       document.head.appendChild(link);
     }
     
-    let faviconUrl = restaurant.logo;
+    let faviconUrl = restaurant.logoUrl || '/favicon.svg';
     // Forzar formato JPG para el favicon si es de Unsplash (auto=format a veces devuelve webp/avif que no sirven de favicon)
-    if (faviconUrl.includes('unsplash.com')) {
+    if (faviconUrl && typeof faviconUrl === 'string' && faviconUrl.includes('unsplash.com')) {
       faviconUrl = faviconUrl.replace('auto=format', 'fm=jpg');
+      link.type = 'image/jpeg';
     }
     
-    link.type = 'image/jpeg';
     link.href = faviconUrl;
 
     // Fetch BCV rate
