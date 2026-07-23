@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Papa from 'papaparse'
 import Header from './components/Header.jsx'
 import Hero from './components/Hero.jsx'
 import ProductCard from './components/ProductCard.jsx'
@@ -12,8 +13,12 @@ function App() {
   const [cart, setCart] = useState([])
   const [selectedItem, setSelectedItem] = useState(null)
   
-  // Extraer información del JSON
-  const { restaurant, theme, categories } = menuData
+  // Extraer información estática del JSON (restaurant y theme)
+  const { restaurant, theme } = menuData
+
+  // Estados para los datos dinámicos (Google Sheets)
+  const [categories, setCategories] = useState(menuData.categories) // Fallback al JSON
+  const [isLoading, setIsLoading] = useState(true)
   
   // Calcular automáticamente si está abierto (Temporalmente forzado a ABIERTO para pruebas)
   const checkIsOpen = () => {
@@ -47,6 +52,50 @@ function App() {
         }
       })
       .catch(error => console.error('Error fetching BCV rate:', error));
+
+    // Fetch Google Sheets Menu
+    const sheetUrl = 'https://docs.google.com/spreadsheets/d/1MWV6Ipn84b4decQCy3cAiKLKpVXbYnArxxsq4ooKD9A/export?format=csv';
+    Papa.parse(sheetUrl, {
+      download: true,
+      header: true,
+      complete: (results) => {
+        const rows = results.data;
+        const catMap = {};
+        
+        rows.forEach(row => {
+          if (!row.Nombre || !row.Categoria) return; // Saltar filas vacías
+          
+          if (!catMap[row.Categoria]) {
+            catMap[row.Categoria] = {
+              id: 'c-' + row.Categoria.replace(/\s+/g, '-').toLowerCase(),
+              name: row.Categoria,
+              items: []
+            };
+          }
+          
+          catMap[row.Categoria].items.push({
+            id: row.ID,
+            name: row.Nombre,
+            description: row.Descripcion,
+            price: parseFloat(row.Precio) || 0,
+            image: row.Imagen_URL,
+            customizable: String(row.Personalizable).toUpperCase() !== 'FALSE',
+            removableIngredients: row.Ingredientes_Removibles ? row.Ingredientes_Removibles.split(',').map(i => i.trim()).filter(Boolean) : [],
+            agotado: String(row.Agotado).toUpperCase() === 'TRUE'
+          });
+        });
+        
+        const newCategories = Object.values(catMap);
+        if (newCategories.length > 0) {
+          setCategories(newCategories);
+        }
+        setIsLoading(false);
+      },
+      error: (error) => {
+        console.error('Error loading Google Sheets data:', error);
+        setIsLoading(false); // Fallback to menu.json categories
+      }
+    });
 
     // Actualizar el estado cada minuto
     const interval = setInterval(() => {
@@ -123,6 +172,16 @@ function App() {
 
   const handleRemoveCartItem = (cartItemId) => {
     setCart(prev => prev.filter(item => item.cartItemId !== cartItemId))
+  }
+
+  if (isLoading) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column', color: 'var(--text-secondary)' }}>
+        <div style={{ width: '40px', height: '40px', border: '4px solid var(--border-color)', borderTop: '4px solid var(--primary-color)', borderRadius: '50%', animation: 'spin 1s linear infinite', marginBottom: '16px' }}></div>
+        <style>{`@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`}</style>
+        <h2>Cargando menú...</h2>
+      </div>
+    );
   }
 
   return (
