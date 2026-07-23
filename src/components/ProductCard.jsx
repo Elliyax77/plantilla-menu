@@ -27,6 +27,7 @@ export default function ProductCard({ item, currency, cartQty, onClick, exchange
             color: '#dc2626',
             backgroundColor: '#fde047',
             display: 'inline-block',
+            alignSelf: 'flex-start',
             padding: '2px 8px',
             borderRadius: '12px',
             boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
