@@ -46,9 +46,16 @@ export default function ItemModal({ item, currency, exchangeRate, onClose, onAdd
         <div className="modal-body">
           <h2 className="modal-title">{item.name}</h2>
           <p className="modal-desc">{item.description}</p>
-          <div className="modal-price">
-            {currency}{item.price.toFixed(2)}
-            {exchangeRate && <span style={{ fontSize: '0.8em', color: 'var(--text-secondary)', marginLeft: '8px' }}>| Bs {(item.price * exchangeRate).toFixed(2)}</span>}
+          <div className="modal-price" style={{ display: 'flex', flexDirection: 'column' }}>
+            {item.previousPrice && (
+              <span style={{ textDecoration: 'line-through', color: 'var(--text-secondary)', fontSize: '16px', marginBottom: '4px' }}>
+                {currency}{item.previousPrice.toFixed(2)}
+              </span>
+            )}
+            <span style={{ color: item.previousPrice ? '#22c55e' : 'inherit' }}>
+              {currency}{item.price.toFixed(2)}
+              {exchangeRate && <span style={{ fontSize: '0.8em', color: 'var(--text-secondary)', marginLeft: '8px' }}>| Bs {(item.price * exchangeRate).toFixed(2)}</span>}
+            </span>
           </div>
 
           {/* Ingredientes removibles */}

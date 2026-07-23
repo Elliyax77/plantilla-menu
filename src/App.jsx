@@ -73,11 +73,16 @@ function App() {
             };
           }
           
+          const prevPriceKey = Object.keys(row).find(k => k.trim().toLowerCase() === 'precio anterior');
+          const prevPriceVal = prevPriceKey ? parseFloat(row[prevPriceKey]) : null;
+          const currentPrice = parseFloat(row.Precio) || 0;
+          
           catMap[row.Categoria].items.push({
             id: row.ID,
             name: row.Nombre,
             description: row.Descripcion,
-            price: parseFloat(row.Precio) || 0,
+            price: currentPrice,
+            previousPrice: (prevPriceVal && prevPriceVal > currentPrice) ? prevPriceVal : null,
             image: row.Imagen_URL,
             customizable: String(row.Personalizable).toUpperCase() !== 'FALSE',
             removableIngredients: row.Ingredientes_Removibles ? row.Ingredientes_Removibles.split(',').map(i => i.trim()).filter(Boolean) : [],
