@@ -51,7 +51,15 @@ function App() {
       link.rel = 'icon';
       document.head.appendChild(link);
     }
-    link.href = restaurant.logo;
+    
+    let faviconUrl = restaurant.logo;
+    // Forzar formato JPG para el favicon si es de Unsplash (auto=format a veces devuelve webp/avif que no sirven de favicon)
+    if (faviconUrl.includes('unsplash.com')) {
+      faviconUrl = faviconUrl.replace('auto=format', 'fm=jpg');
+    }
+    
+    link.type = 'image/jpeg';
+    link.href = faviconUrl;
 
     // Fetch BCV rate
     fetch('https://ve.dolarapi.com/v1/dolares/oficial')
