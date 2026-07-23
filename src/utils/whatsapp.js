@@ -1,4 +1,5 @@
 export function generateWhatsAppLink(cart, items, formData, restaurant, totalPrice) {
+  const { exchangeRate } = restaurant;
   const orderId = Math.floor(100000 + Math.random() * 900000);
 
   // Decodificamos los emojis desde su código hexadecimal seguro de URL.
@@ -43,7 +44,13 @@ export function generateWhatsAppLink(cart, items, formData, restaurant, totalPri
   });
 
   message += `\n${eTruck} *${envio}:* A confirmar\n`;
-  message += `${eMoney} *Total:* ${restaurant.currency}${totalPrice.toFixed(2)}\n`;
+  message += `${eMoney} *Total:* ${restaurant.currency}${totalPrice.toFixed(2)}`;
+  if (exchangeRate) {
+    message += ` (Bs. ${(totalPrice * exchangeRate).toFixed(2)})\n`;
+    message += `   Tasa BCV: Bs. ${exchangeRate} / USD\n`;
+  } else {
+    message += `\n`;
+  }
   message += `---------\n\n`;
 
   message += `*${formData.name}*\n`;

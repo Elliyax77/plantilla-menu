@@ -35,8 +35,19 @@ function App() {
   };
 
   const [isRestaurantOpen, setIsRestaurantOpen] = useState(checkIsOpen());
+  const [exchangeRate, setExchangeRate] = useState(null);
 
   useEffect(() => {
+    // Fetch BCV rate
+    fetch('https://ve.dolarapi.com/v1/dolares/oficial')
+      .then(response => response.json())
+      .then(data => {
+        if (data && data.promedio) {
+          setExchangeRate(data.promedio);
+        }
+      })
+      .catch(error => console.error('Error fetching BCV rate:', error));
+
     // Actualizar el estado cada minuto
     const interval = setInterval(() => {
       setIsRestaurantOpen(checkIsOpen());
@@ -44,7 +55,7 @@ function App() {
     return () => clearInterval(interval);
   }, []);
 
-  const computedRestaurant = { ...restaurant, isOpen: isRestaurantOpen };
+  const computedRestaurant = { ...restaurant, isOpen: isRestaurantOpen, exchangeRate };
 
   // Todos los productos planos para fácil búsqueda
   const allItems = categories.flatMap(c => c.items)
@@ -132,6 +143,7 @@ function App() {
                     item={item} 
                     currency={restaurant.currency}
                     cartQty={getProductTotalQty(item.id)}
+                    exchangeRate={exchangeRate}
                     onClick={() => handleProductClick(item)}
                   />
                 ))}
@@ -160,6 +172,7 @@ function App() {
         <ItemModal 
           item={selectedItem} 
           currency={restaurant.currency}
+          exchangeRate={exchangeRate}
           onClose={() => setSelectedItem(null)}
           onAddToCart={handleAddToCart}
         />

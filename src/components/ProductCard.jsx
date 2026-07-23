@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function ProductCard({ item, currency, cartQty, onClick }) {
+export default function ProductCard({ item, currency, cartQty, onClick, exchangeRate }) {
   return (
     <div className="product-card" onClick={onClick} style={{ cursor: 'pointer' }}>
       <img src={item.image} alt={item.name} className="product-image" loading="lazy" />
@@ -8,7 +8,10 @@ export default function ProductCard({ item, currency, cartQty, onClick }) {
         <h3 className="product-name">{item.name}</h3>
         <p className="product-desc">{item.description}</p>
         <div className="product-footer">
-          <span className="product-price">{currency}{item.price.toFixed(2)}</span>
+          <span className="product-price">
+            {currency}{item.price.toFixed(2)}
+            {exchangeRate && <span style={{ fontSize: '0.85em', color: 'var(--text-secondary)', marginLeft: '4px' }}>| Bs {(item.price * exchangeRate).toFixed(2)}</span>}
+          </span>
           
           {cartQty > 0 ? (
             <div className="quantity-badge">

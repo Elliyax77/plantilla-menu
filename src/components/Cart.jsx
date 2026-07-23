@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { generateWhatsAppLink } from '../utils/whatsapp.js';
 
 export default function Cart({ cart, items, currency, restaurant, onUpdateQty, onRemoveItem }) {
+  const { exchangeRate } = restaurant;
   const [isOpen, setIsOpen] = useState(false);
   const [isPrefixOpen, setIsPrefixOpen] = useState(false);
   const prefixes = ['0414', '0424', '0412', '0416', '0426'];
@@ -41,7 +42,10 @@ export default function Cart({ cart, items, currency, restaurant, onUpdateQty, o
       <div className="cart-bar" onClick={() => setIsOpen(true)}>
         <div className="cart-info">
           <span className="cart-items">{totalItems} {totalItems === 1 ? 'producto' : 'productos'}</span>
-          <span className="cart-total">{currency}{totalPrice.toFixed(2)}</span>
+          <span className="cart-total">
+            {currency}{totalPrice.toFixed(2)}
+            {exchangeRate && <span style={{ fontSize: '0.8em', marginLeft: '6px', fontWeight: 'normal', opacity: 0.9 }}>| Bs {(totalPrice * exchangeRate).toFixed(2)}</span>}
+          </span>
         </div>
         <button className="btn-checkout">Ver Pedido</button>
       </div>
@@ -66,6 +70,7 @@ export default function Cart({ cart, items, currency, restaurant, onUpdateQty, o
                         <span style={{ fontWeight: '600' }}>{item.name}</span>
                         <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
                           {currency}{(item.price * cartItem.quantity).toFixed(2)}
+                          {exchangeRate && ` | Bs ${(item.price * cartItem.quantity * exchangeRate).toFixed(2)}`}
                         </span>
                       </div>
                       
@@ -110,9 +115,12 @@ export default function Cart({ cart, items, currency, restaurant, onUpdateQty, o
                   </div>
                 );
               })}
-              <div className="cart-item-row" style={{ fontWeight: 'bold', fontSize: '18px', marginTop: '16px' }}>
+              <div className="cart-item-row" style={{ fontWeight: 'bold', fontSize: '18px', marginTop: '16px', borderTop: '2px solid var(--border-color)', paddingTop: '16px' }}>
                 <span>Total a pagar</span>
-                <span>{currency}{totalPrice.toFixed(2)}</span>
+                <div style={{ textAlign: 'right' }}>
+                  <div>{currency}{totalPrice.toFixed(2)}</div>
+                  {exchangeRate && <div style={{ fontSize: '14px', color: 'var(--text-secondary)', marginTop: '4px' }}>Bs {(totalPrice * exchangeRate).toFixed(2)}</div>}
+                </div>
               </div>
             </div>
 

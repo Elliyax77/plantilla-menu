@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function ItemModal({ item, currency, onClose, onAddToCart }) {
+export default function ItemModal({ item, currency, exchangeRate, onClose, onAddToCart }) {
   const [quantity, setQuantity] = useState(1);
   const [notes, setNotes] = useState('');
   
@@ -46,7 +46,10 @@ export default function ItemModal({ item, currency, onClose, onAddToCart }) {
         <div className="modal-body">
           <h2 className="modal-title">{item.name}</h2>
           <p className="modal-desc">{item.description}</p>
-          <div className="modal-price">{currency}{item.price.toFixed(2)}</div>
+          <div className="modal-price">
+            {currency}{item.price.toFixed(2)}
+            {exchangeRate && <span style={{ fontSize: '0.8em', color: 'var(--text-secondary)', marginLeft: '8px' }}>| Bs {(item.price * exchangeRate).toFixed(2)}</span>}
+          </div>
 
           {/* Ingredientes removibles */}
           {item.removableIngredients && item.removableIngredients.length > 0 && (
@@ -99,6 +102,7 @@ export default function ItemModal({ item, currency, onClose, onAddToCart }) {
           
           <button className="btn-add-large" onClick={handleAdd}>
             Agregar {quantity > 1 ? quantity : ''} - {currency}{(item.price * quantity).toFixed(2)}
+            {exchangeRate && ` (Bs ${((item.price * quantity) * exchangeRate).toFixed(2)})`}
           </button>
         </div>
       </div>
