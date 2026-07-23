@@ -43,6 +43,16 @@ function App() {
   const [exchangeRate, setExchangeRate] = useState(null);
 
   useEffect(() => {
+    // Update document title and favicon
+    document.title = restaurant.name;
+    let link = document.querySelector("link[rel~='icon']");
+    if (!link) {
+      link = document.createElement('link');
+      link.rel = 'icon';
+      document.head.appendChild(link);
+    }
+    link.href = restaurant.logo;
+
     // Fetch BCV rate
     fetch('https://ve.dolarapi.com/v1/dolares/oficial')
       .then(response => response.json())
