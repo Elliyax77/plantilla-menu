@@ -41,11 +41,11 @@ export default function Cart({ cart, items, currency, restaurant, onUpdateQty, o
       {/* Barra Inferior */}
       <div className="cart-bar" onClick={() => setIsOpen(true)}>
         <div className="cart-info">
-          <span className="cart-items">{totalItems} {totalItems === 1 ? 'producto' : 'productos'}</span>
-          <span className="cart-total">
-            {currency}{totalPrice.toFixed(2)}
-            {exchangeRate && <span style={{ fontSize: '0.8em', marginLeft: '6px', fontWeight: 'normal', opacity: 0.9 }}>| Bs {(totalPrice * exchangeRate).toFixed(2)}</span>}
-          </span>
+          <span className="cart-items" style={{ whiteSpace: 'nowrap' }}>{totalItems} {totalItems === 1 ? 'prod' : 'prods'}</span>
+          <div className="cart-total" style={{ display: 'flex', flexDirection: 'column', lineHeight: '1.1' }}>
+            <span>{currency}{totalPrice.toFixed(2)}</span>
+            {exchangeRate && <span style={{ fontSize: '13px', fontWeight: 'normal', opacity: 0.9 }}>Bs {(totalPrice * exchangeRate).toFixed(2)}</span>}
+          </div>
         </div>
         <button className="btn-checkout">Ver Pedido</button>
       </div>
