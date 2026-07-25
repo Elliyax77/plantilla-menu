@@ -44,10 +44,9 @@ export default function ProductCard({ item, currency, cartQty, onClick, exchange
                 {currency}{item.previousPrice.toFixed(2)}
               </span>
             )}
-            <div className="product-price" style={{ display: 'flex', flexDirection: 'column', lineHeight: '1.2' }}>
-              <span>{currency}{item.price.toFixed(2)}</span>
-              {exchangeRate && <span style={{ fontSize: '0.85em', opacity: 0.9 }}>Bs {(item.price * exchangeRate).toFixed(2)}</span>}
-            </div>
+            <span className="product-price">
+              {currency}{item.price.toFixed(2)}
+            </span>
           </div>
           
           {item.agotado ? (
